@@ -1,0 +1,103 @@
+// Names: Nicole Hipolito, Carlos Huizar, Mavey Ma, Mario Martinez.
+// Created: Friday, Oct. 30, 2015
+// Kidnapper Voice Recognition
+
+#include<iostream>
+#include<fstream> //ifstream, ofstream
+#include<cstdlib> //exit(1)
+#include<iomanip>
+#include<cmath>
+using namespace std;
+
+double mean(double ary[], int n);
+double stdDev(double ary[], int n);
+double var(double ary[], int n);
+double avgPower(double ary[], int n);
+double avgMagnitude(double ary[], int n);
+int zeroCross(double ary[], int n);
+
+int main()
+{
+    ifstream finA;
+    ifstream finB;
+    ofstream fout;
+    
+    finA.open("two_a.txt");
+    finB.open("two_b.txt");
+    fout.open("comparison.txt");
+    
+    if (finA.fail() || finB.fail() || fout.fail())
+    {
+        cout << "Error: cannot open file.\n";
+        exit(1);
+    }
+    
+    finA.close();
+    finB.close();
+    fout.close();
+    return 0;
+}//END MAIN
+//*******************************************
+double mean(double ary[], int n)
+{
+
+}//END MEAN
+
+
+//*******************************************
+double stdDev(double ary[], int n)
+{
+    double variance = var(double ary[], int n);
+    return = sqrt(variance);
+
+}//END STANDARD DEVIATION
+
+
+//*******************************************
+double variance(int ary[], int numberElement)
+{
+    double mean1 = mean(ary, numberElement);
+    double top = 0, total, x;
+    for(int ix = 0; ix < numberElement; ix++)
+    {
+        x = pow((ary[ix] - mean1), 2);
+        top += x;
+
+    }
+    total = top / numberElement;
+    
+    return total;
+}
+
+
+//*******************************************
+void avgMagnitude(double a[], int n)
+{
+    double sum = 0, totalVal = 0;
+    int i = 0;
+    for(i; i < n; i++)
+    {
+        sum += fabs(a[i]);
+    
+    }
+    totalVal = sum/i;
+    cout << totalVal << endl;
+}
+void avgPower(double a[], int n)
+{
+    double sum = 0, totalVal = 0;
+    int i = 0;
+    for(i; i < n; i++)
+    {
+        sum += pow(a[i], 2);
+    
+    }
+    totalVal = sum/i;
+    cout << totalVal << endl;
+}
+
+//*******************************************
+int zeroCross(double ary[], int n)
+{
+
+}//END NUMBER OF ZERO CROSSINGS
