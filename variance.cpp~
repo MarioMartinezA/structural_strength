@@ -1,59 +1,107 @@
 // Names: Nicole Hipolito, Carlos Huizar, Mavey Ma, Mario Martinez.
 // Created: Friday, Oct. 30, 2015
-// Kidnapper Voice Recognition
+// Steel / Graphite
 
-#include<iostream>
-#include<fstream> //ifstream, ofstream
-#include<cstdlib> //exit(1)
-#include<iomanip>
-#include<cmath>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+#include <iomanip>
+#include <cmath>
 using namespace std;
 
-double mean(double ary[], int n);
-double stdDev(double ary[], int n);
-double var(double ary[], int n);
-double avgPower(double ary[], int n);
-double avgMagnitude(double ary[], int n);
-int zeroCross(double ary[], int n);
+void printAry(int ary[], int n);
+double mean(int ary[], int n);
+int maxValue(int ary[], int n);
+int min(int a[], int n);
+double variance(int ary[], int numberElement);
+double standardDeviation(int ary[], int numberElement);
 
 int main()
 {
-    ifstream finA;
+    ifstream fin;
     ifstream finB;
     ofstream fout;
-    
-    finA.open("two_a.txt");
-    finB.open("two_b.txt");
-    fout.open("comparison.txt");
-    
-    if (finA.fail() || finB.fail() || fout.fail())
+    int count = 0;
+    int count2 = 0;
+    int nums, num2;
+    int ary[20];
+    int ary2[20];
+    fin.open("data1.txt");
+    finB.open("data2.txt");
+    fout.open("results.txt");
+    if(fin.fail() || finB.fail() || fout.fail())
     {
-        cout << "Error: cannot open file.\n";
-        exit(1);
+        cout << "Error in file\n";
+    }
+    while(fin >> nums)
+    {
+        ary[count] = nums; 
+        count++;
+    }
+    while(finB >> num2)
+    {
+        ary2[count2] = num2;
+        count2++;
     }
     
-    finA.close();
+    fout.setf(ios::fixed);
+    fout.setf(ios::showpoint);
+    fout.precision(2);
+    
+    fout << "" << endl;
+    
+    fout << "Mean for data1: " << mean(ary, count) << endl;
+    fout << "Mean for data2: " << mean(ary2, count2) << endl;
+    fout << "Max value for data1: " << maxValue(ary, count) << endl;
+    fout << "Max value for data2: " << maxValue(ary2, count2) << endl;
+    fout << "Min value for data1: " << min(ary, count) << endl;
+    fout << "Min value for data2: " << min(ary2, count2) << endl;
+    fout << "Variance for data1: " << variance(ary, count) << endl;
+    fout << "Variance for data2: " << variance(ary2, count2) << endl;
+    fout << "Standard Deviation for data1: " << standardDeviation(ary, count) << endl;
+    fout << "Standard Deviation for data2: " << standardDeviation(ary2, count2) << endl;
+    
+    fin.close();
     finB.close();
     fout.close();
     return 0;
-}//END MAIN
-//*******************************************
-double mean(double ary[], int n)
+}
+//*************************************************
+void printAry(int ary[], int n)
 {
-
-}//END MEAN
-
-
-//*******************************************
-double stdDev(double ary[], int n)
+    for(int i = 0; i < n; i++)
+    {
+        cout << setw(7) << ary[i];
+    }
+    cout << endl;
+}
+//*************************************************
+double mean(int ary[], int n)
 {
-    double variance = var(double ary[], int n);
-    return = sqrt(variance);
-
-}//END STANDARD DEVIATION
-
-
-//*******************************************
+    double total = 0;
+    double average;
+    for (int ix = 0; ix < n; ix++)
+    {
+        total += ary[ix];
+    }//END FOR LOOP
+    average = total / n;
+    return average;
+}//END MEAN 
+//*************************************************
+int maxValue(int ary[], int n)
+{
+    int max = ary[0];
+    for(int i = 0; i < n; i++)
+    {
+        if(ary[i] > max)
+        {
+            max = ary[i];
+        }
+    }
+    return max;
+}
+//*************************************************
 double variance(int ary[], int numberElement)
 {
     double mean1 = mean(ary, numberElement);
@@ -68,36 +116,26 @@ double variance(int ary[], int numberElement)
     
     return total;
 }
-
-
-//*******************************************
-void avgMagnitude(double a[], int n)
+//*************************************************
+double standardDeviation(int ary[], int numberElement)
 {
-    double sum = 0, totalVal = 0;
-    int i = 0;
-    for(i; i < n; i++)
-    {
-        sum += fabs(a[i]);
-    
-    }
-    totalVal = sum/i;
-    cout << totalVal << endl;
+    double variance1 = variance(ary , numberElement);
+    double mean1 = mean(ary , numberElement);
+    double deviation = mean1 - sqrt(variance1)*3;
+    return deviation;
 }
-void avgPower(double a[], int n)
+//*************************************************
+int min(int a[], int n)
 {
-    double sum = 0, totalVal = 0;
-    int i = 0;
-    for(i; i < n; i++)
+    int min = a[0];
+    for(int i = 0; i < n; i++)
     {
-        sum += pow(a[i], 2);
+        if(min > a[i])
+        {
+            min = a[i];
+        }
     
-    }
-    totalVal = sum/i;
-    cout << totalVal << endl;
+    }   
+    return min;
 }
-
-//*******************************************
-int zeroCross(double ary[], int n)
-{
-
-}//END NUMBER OF ZERO CROSSINGS
+//*************************************************

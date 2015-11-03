@@ -21,6 +21,7 @@ int main()
 {
     ifstream fin;
     ifstream finB;
+    ofstream fout;
     int count = 0;
     int count2 = 0;
     int nums, num2;
@@ -28,7 +29,8 @@ int main()
     int ary2[20];
     fin.open("data1.txt");
     finB.open("data2.txt");
-    if(fin.fail() || finB.fail())
+    fout.open("results.txt");
+    if(fin.fail() || finB.fail() || fout.fail())
     {
         cout << "Error in file\n";
     }
@@ -43,23 +45,26 @@ int main()
         count2++;
     }
     
-    cout.setf(ios::fixed);
-    cout.setf(ios::showpoint);
-    cout.precision(2);
+    fout.setf(ios::fixed);
+    fout.setf(ios::showpoint);
+    fout.precision(2);
     
-    cout << "Mean for data1: " << mean(ary, count) << endl;
-    cout << "Mean for data2: " << mean(ary2, count2) << endl;
-    cout << "Max value for data1: " << maxValue(ary, count) << endl;
-    cout << "Max value for data2: " << maxValue(ary2, count2) << endl;
-    cout << "Min value for data1: " << min(ary, count) << endl;
-    cout << "Min value for data2: " << min(ary2, count2) << endl;
-    cout << "Variance for data1: " << variance(ary, count) << endl;
-    cout << "Variance for data2: " << variance(ary2, count2) << endl;
-    cout << "Standard Deviation for data1: " << standardDeviation(ary, count) << endl;
-    cout << "Standard Deviation for data2: " << standardDeviation(ary2, count2) << endl;
+    fout << "Nicole Hipolito, Carlos Huizar, Mavey Ma, Mario Martinez." << endl;
+    
+    fout << "Mean for data1: " << mean(ary, count) << endl;
+    fout << "Mean for data2: " << mean(ary2, count2) << endl;
+    fout << "Max value for data1: " << maxValue(ary, count) << endl;
+    fout << "Max value for data2: " << maxValue(ary2, count2) << endl;
+    fout << "Min value for data1: " << min(ary, count) << endl;
+    fout << "Min value for data2: " << min(ary2, count2) << endl;
+    fout << "Variance for data1: " << variance(ary, count) << endl;
+    fout << "Variance for data2: " << variance(ary2, count2) << endl;
+    fout << "Standard Deviation for data1: " << standardDeviation(ary, count) << endl;
+    fout << "Standard Deviation for data2: " << standardDeviation(ary2, count2) << endl;
     
     fin.close();
     finB.close();
+    fout.close();
     return 0;
 }
 //*************************************************
